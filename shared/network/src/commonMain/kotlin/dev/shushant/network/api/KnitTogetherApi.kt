@@ -10,10 +10,9 @@ class KnitTogetherApi : BaseAPI() {
         get() = "https://dummy.com/"
 
     suspend fun getPosts(): Either<List<Any>, NetworkFailure> {
-        return doGet<Any>("endPoint").flatMap { breedResult ->
-            //Converting BreedResult to List<TBreed>
+        return doGet<Any>("endPoint").flatMap { posts ->
             Either.Success(
-                listOf()
+                listOf(posts)
             )
         }
     }
