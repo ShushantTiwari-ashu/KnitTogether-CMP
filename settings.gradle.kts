@@ -16,6 +16,7 @@ pluginManagement {
     repositories {
         gradlePluginPortal()
         maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
+        mavenCentral()
         google()
     }
 
@@ -32,6 +33,7 @@ pluginManagement {
         id("com.android.library").version(agpVersion)
 
         id("org.jetbrains.compose").version(composeVersion)
+        id("com.google.gms.google-services").version("4.3.15")
     }
 }
 

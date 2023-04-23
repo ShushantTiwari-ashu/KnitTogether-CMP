@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "116047296145",
+    "project_id": "knittogether-f397c",
+    "storage_bucket": "knittogether-f397c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:116047296145:android:1521c93ad5a3527ab4b130",
+        "android_client_info": {
+          "package_name": "dev.shushant.knit_together.android"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "116047296145-4kpa67lmrbgvr9upac4o0hmkqq5opis9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "dev.shushant.knit_together.android",
+            "certificate_hash": "297c47461294cf8a73a4385e8eec26b6673cf7aa"
+          }
+        },
+        {
+          "client_id": "116047296145-p905mrp7muo34rs2q2nvi5lgn9bn1j1c.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBswXSI0pWr7M3o4kcZyYViCvWzbyj4ass"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "116047296145-p905mrp7muo34rs2q2nvi5lgn9bn1j1c.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

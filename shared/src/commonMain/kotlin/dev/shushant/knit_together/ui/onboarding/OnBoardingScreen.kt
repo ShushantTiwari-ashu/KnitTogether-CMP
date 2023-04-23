@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentHeight
@@ -22,12 +23,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import dev.shushant.knit_together.utils.GradientIcon
 import dev.shushant.resource.dimens.getDimens
 import dev.shushant.resource.extensions.textBrush
+import dev.shushant.resource.navigation.NavOptions
 import dev.shushant.resource.navigation.Navigator
 import dev.shushant.resource.navigation.Screens
 import kotlinx.coroutines.delay
@@ -41,10 +44,12 @@ fun OnBoardingScreen(navigator: Navigator) {
         Column(
             modifier = Modifier.align(Alignment.Center).wrapContentHeight(),
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(30.getDimens)
+            verticalArrangement = Arrangement.spacedBy(30.dp)
         ) {
             Image(
-                painter = painterResource("onboarding_illustration.xml"), contentDescription = null
+                painter = painterResource("onboarding_illustration.png"), contentDescription = null,
+                modifier = Modifier.heightIn(max = 300.dp),
+                contentScale = ContentScale.Inside
             )
 
             Text(
@@ -69,13 +74,16 @@ fun OnBoardingScreen(navigator: Navigator) {
             modifier = Modifier.align(
                 Alignment.TopEnd
             ).padding(20.dp).background(color = Color.White, CircleShape).size(36.dp), onClick = {
-                navigator.push(Screens.AuthenticateScreen)
+                navigator.push(
+                    Screens.AuthenticateScreen,
+                )
             }
         )
 
         Text(
             "\"Unravel your creativity with our knitting community.\"",
-            modifier = Modifier.padding(horizontal = 20.dp, vertical = 20.dp).align(Alignment.BottomCenter),
+            modifier = Modifier.padding(horizontal = 20.dp, vertical = 20.dp)
+                .align(Alignment.BottomCenter),
             style = MaterialTheme.typography.bodyMedium,
             fontWeight = FontWeight.Medium,
             color = Color.Black,

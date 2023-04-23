@@ -2,7 +2,7 @@ package dev.shushant.resource.common
 
 object AuthValidator {
     fun isValidEmail(email: String): Boolean =
-        email.isNotBlank() || email.isNotEmpty() || isEmailValid(email)
+        email.isNotBlank() && email.isNotEmpty() && isEmailValid(email)
 
     fun isValidPassword(password: String): Boolean = password.trim().length in (8..50)
 

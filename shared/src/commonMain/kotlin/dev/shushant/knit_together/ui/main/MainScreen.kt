@@ -1,6 +1,8 @@
 package dev.shushant.knit_together.ui.main
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.gestures.detectDragGestures
+import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.WindowInsets
@@ -19,6 +21,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.pointer.pointerInput
 import dev.shushant.knit_together.ui.authenticate.AuthenticateScreen
 import dev.shushant.knit_together.ui.onboarding.OnBoardingScreen
 import dev.shushant.knit_together.ui.signin.SignInScreen
@@ -33,6 +36,8 @@ import dev.shushant.resource.navigation.Backstack
 import dev.shushant.resource.navigation.Navigator
 import dev.shushant.resource.navigation.Screens
 import dev.shushant.resource.navigation.getInitialScreen
+import dev.shushant.resource.theme.CurrentPlatform
+import dev.shushant.resource.theme.Platform
 import dev.shushant.resource.theme.SafeArea
 import kotlinx.coroutines.launch
 
@@ -41,15 +46,19 @@ import kotlinx.coroutines.launch
 internal fun MainScreen(
     modifier: Modifier,
 ) {
+    var offsetX by remember { mutableStateOf(0f) }
+    var offsetY by remember { mutableStateOf(0f) }
     val mediaPickerController = LocalMediaPickerController.current
     val coroutineScope = rememberCoroutineScope()
     val initialScreen = getInitialScreen
+    val enableSwipeGuesture =
+        (CurrentPlatform.current.value == Platform.DESKTOP || CurrentPlatform.current.value == Platform.IOS)
     var images by remember { mutableStateOf<AppBitmap?>(null) }
     var backstack: List<Screens> by remember { mutableStateOf(listOf(initialScreen)) }
     val navigator = remember {
         Navigator(
             push = { backstack += it },
-            pop = { backstack = backstack.dropLast(1) }
+            pop = { backstack = backstack.dropLast(1) },
         )
     }
     BackHandler {
@@ -62,7 +71,30 @@ internal fun MainScreen(
     }
 
     Scaffold(containerColor = Color.Transparent,
-        modifier = modifier,
+        modifier = modifier.pointerInput(Unit) {
+            detectDragGestures { change, dragAmount ->
+                change.consume()
+                val (x, y) = dragAmount
+                when {
+                    x > 0 -> {
+                        //Right
+                    }
+
+                    x < 0 -> {
+                        //Left
+                    }
+                }
+                when {
+                    y > 0 -> { /* down */
+                    }
+
+                    y < 0 -> { /* up */
+                    }
+                }
+                offsetX += dragAmount.x
+                offsetY += dragAmount.y
+            }
+        },
         contentColor = MaterialTheme.colorScheme.onBackground,
         contentWindowInsets = WindowInsets(0, 0, 0, 0),
         bottomBar = {
