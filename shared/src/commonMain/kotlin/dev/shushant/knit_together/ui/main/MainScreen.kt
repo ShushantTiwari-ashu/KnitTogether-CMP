@@ -1,7 +1,6 @@
 package dev.shushant.knit_together.ui.main
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.WindowInsets
@@ -18,10 +17,13 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
+import dev.shushant.knit_together.ui.authenticate.AuthenticateScreen
+import dev.shushant.knit_together.ui.onboarding.OnBoardingScreen
+import dev.shushant.knit_together.ui.signin.SignInScreen
+import dev.shushant.knit_together.ui.splash.SplashScreen
+import dev.shushant.knit_together.utils.BackHandler
 import dev.shushant.knit_together.utils.LocalMediaPickerController
 import dev.shushant.permission.Permission
 import dev.shushant.permission.data.AppBitmap
@@ -30,27 +32,30 @@ import dev.shushant.resource.dimens.getDimens
 import dev.shushant.resource.navigation.Backstack
 import dev.shushant.resource.navigation.Navigator
 import dev.shushant.resource.navigation.Screens
+import dev.shushant.resource.navigation.getInitialScreen
 import dev.shushant.resource.theme.SafeArea
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import org.jetbrains.compose.resources.ExperimentalResourceApi
-import org.jetbrains.compose.resources.painterResource
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalLayoutApi::class)
 @Composable
 internal fun MainScreen(
     modifier: Modifier,
-    //appState: AppState = rememberAppState(),
 ) {
     val mediaPickerController = LocalMediaPickerController.current
     val coroutineScope = rememberCoroutineScope()
+    val initialScreen = getInitialScreen
     var images by remember { mutableStateOf<AppBitmap?>(null) }
-    var backstack: List<Screens> by remember { mutableStateOf(listOf(Screens.Splash)) }
+    var backstack: List<Screens> by remember { mutableStateOf(listOf(initialScreen)) }
     val navigator = remember {
         Navigator(
             push = { backstack += it },
             pop = { backstack = backstack.dropLast(1) }
         )
+    }
+    BackHandler {
+        if (backstack.isNotEmpty()) {
+            navigator.pop()
+        }
     }
     LaunchedEffect(Unit) {
         mediaPickerController.permissionsController.providePermission(Permission.GALLERY)
@@ -65,7 +70,8 @@ internal fun MainScreen(
         }) { padding ->
         Column(
             Modifier.fillMaxSize().padding(padding).padding(
-                top = SafeArea.current.value.calculateTopPadding() + 20.getDimens
+                top = SafeArea.current.value.calculateTopPadding() + 20.getDimens,
+                bottom = SafeArea.current.value.calculateBottomPadding()
             ).consumeWindowInsets(padding)
         ) {
             /*if (false) {
@@ -82,7 +88,9 @@ internal fun MainScreen(
                     },
                     onAllLocation = {})
             }*/
-            Backstack(backstack) { screen ->
+            Backstack(
+                backstack,
+            ) { screen ->
                 when (screen) {
                     Screens.Splash -> SplashScreen(navigator)
                     Screens.Home -> Dummy(images) {
@@ -94,6 +102,20 @@ internal fun MainScreen(
                             }
                         }
                     }
+
+                    Screens.OnBoardingScreen -> {
+                        OnBoardingScreen(navigator)
+                    }
+
+                    Screens.AuthenticateScreen -> {
+                        AuthenticateScreen(navigator)
+                    }
+
+                    Screens.SignIn -> {
+                        SignInScreen(navigator)
+                    }
+
+                    else -> {}
                 }
             }
         }
@@ -107,22 +129,5 @@ internal fun Dummy(bitmap: AppBitmap?, function: () -> Unit) {
     }
     bitmap?.let {
         Image(it.toImageBitmap(), contentDescription = null)
-    }
-}
-
-@OptIn(ExperimentalResourceApi::class)
-@Composable
-internal fun SplashScreen(appState: Navigator) {
-    LaunchedEffect(Unit) {
-        delay(2000L)
-        appState.push(Screens.Home)
-    }
-    Box(modifier = Modifier.fillMaxSize()) {
-        Image(
-            painter = painterResource("splash.png"),
-            contentDescription = null,
-            modifier = Modifier.align(Alignment.Center).padding(20.getDimens).fillMaxSize(0.5f),
-            contentScale = ContentScale.Inside
-        )
     }
 }
