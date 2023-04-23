@@ -1,6 +1,7 @@
 package dev.shushant.knit_together.ui.signin
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -12,6 +13,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -23,13 +26,18 @@ import org.jetbrains.compose.resources.painterResource
 @OptIn(ExperimentalResourceApi::class)
 @Composable
 internal fun SignInScreen(navigator: Navigator) {
+    val localFocusManager = LocalFocusManager.current
     Column(
-        modifier = Modifier.fillMaxSize().padding(horizontal = 20.dp),
+        modifier = Modifier.fillMaxSize().padding(horizontal = 20.dp).pointerInput(Unit) {
+            detectTapGestures(onTap = {
+                localFocusManager.clearFocus()
+            })
+        },
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(30.getDimens)
     ) {
         Image(
-            painter = painterResource("onboarding.png"),
+            painter = painterResource("splash.png"),
             contentDescription = null,
             modifier = Modifier.size(104.getDimens)
         )
@@ -50,7 +58,7 @@ internal fun SignInScreen(navigator: Navigator) {
             color = Color.Black,
             textAlign = TextAlign.Center
         )
-        LoginFields(loginState = LoginState())
+        LoginFields(loginState = LoginState(),localFocusManager)
 
     }
 }

@@ -17,9 +17,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusManager
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
-import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
@@ -29,7 +29,6 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
-import dev.shushant.resource.extensions.textColor
 import dev.shushant.resource.extensions.textFieldColors
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.painterResource
@@ -39,8 +38,7 @@ import org.jetbrains.compose.resources.painterResource
     ExperimentalMaterial3Api::class
 )
 @Composable
-internal fun LoginFields(loginState: LoginState) {
-    val focusManager = LocalFocusManager.current
+internal fun LoginFields(loginState: LoginState, localFocusManager: FocusManager) {
     var passwordVisibility: Boolean by remember { mutableStateOf(false) }
     val keyboardController = LocalSoftwareKeyboardController.current
 
@@ -140,7 +138,7 @@ internal fun LoginFields(loginState: LoginState) {
         visualTransformation = if (passwordVisibility) VisualTransformation.None else PasswordVisualTransformation(
             '*'
         ),
-        keyboardActions = KeyboardActions(onDone = { focusManager.clearFocus() }),
+        keyboardActions = KeyboardActions(onDone = { localFocusManager.clearFocus() }),
         colors = textFieldColors,
         singleLine = true,
         modifier = Modifier

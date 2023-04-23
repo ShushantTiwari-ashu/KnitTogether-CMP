@@ -68,7 +68,7 @@ fun OnBoardingScreen(navigator: Navigator) {
             icon = Icons.Filled.ArrowForward,
             modifier = Modifier.align(
                 Alignment.TopEnd
-            ).padding(20.dp).background(color = Color.White, CircleShape).size(36.getDimens), onClick = {
+            ).padding(20.dp).background(color = Color.White, CircleShape).size(36.dp), onClick = {
                 navigator.push(Screens.AuthenticateScreen)
             }
         )
