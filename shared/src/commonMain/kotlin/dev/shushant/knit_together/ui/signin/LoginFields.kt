@@ -2,7 +2,9 @@ package dev.shushant.knit_together.ui.signin
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
@@ -15,6 +17,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusManager
@@ -38,13 +41,17 @@ import org.jetbrains.compose.resources.painterResource
     ExperimentalMaterial3Api::class
 )
 @Composable
-internal fun LoginFields(loginState: LoginState, localFocusManager: FocusManager) {
+internal fun LoginFields(
+    loginState: LoginState,
+    localFocusManager: FocusManager,
+    signInViewModel: SignInViewModel
+) {
     var passwordVisibility: Boolean by remember { mutableStateOf(false) }
     val keyboardController = LocalSoftwareKeyboardController.current
 
     OutlinedTextField(
         value = loginState.email,
-        onValueChange = {},
+        onValueChange = { signInViewModel.setEmail(it) },
         isError = !(loginState.isValidEmail ?: true),
         placeholder = {
             Text(
@@ -94,7 +101,7 @@ internal fun LoginFields(loginState: LoginState, localFocusManager: FocusManager
 
     OutlinedTextField(
         value = loginState.password,
-        onValueChange = {},
+        onValueChange = { signInViewModel.setPassword(it) },
         isError = !(loginState.isValidEmail ?: true),
         placeholder = {
             Text(
@@ -144,6 +151,19 @@ internal fun LoginFields(loginState: LoginState, localFocusManager: FocusManager
         modifier = Modifier
             .fillMaxWidth(), shape = RoundedCornerShape(10.dp)
     )
+
+    Box(modifier = Modifier.fillMaxWidth()) {
+        Text(
+            text = "Forgot Password?",
+            textAlign = TextAlign.End,
+            style = MaterialTheme.typography.bodyLarge,
+            color = Color(0XFF7268DC),
+            modifier = Modifier
+                .align(Alignment.CenterEnd)
+                .wrapContentSize()
+                .clickable { }
+        )
+    }
 
 }
 
