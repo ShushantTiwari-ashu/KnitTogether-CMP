@@ -36,6 +36,7 @@ internal fun SignInScreen(navigator: Navigator) {
     val localFocusManager = LocalFocusManager.current
     val signInViewModel = rememberSignInViewModel()
     val loginState by signInViewModel.state.collectAsState()
+
     Column(
         modifier = Modifier.fillMaxSize().padding(horizontal = 20.dp).pointerInput(Unit) {
             detectTapGestures(onTap = {
@@ -70,7 +71,9 @@ internal fun SignInScreen(navigator: Navigator) {
             color = Color.Black,
             textAlign = TextAlign.Center
         )
+
         LoginFields(loginState = loginState, localFocusManager, signInViewModel)
+
 
         GradientButton(text = "Log In") {
             signInViewModel.login()
