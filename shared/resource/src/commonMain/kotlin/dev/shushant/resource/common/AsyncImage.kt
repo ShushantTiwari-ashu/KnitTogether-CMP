@@ -13,12 +13,13 @@ import androidx.compose.ui.layout.ContentScale
 @Composable
 expect fun AsyncImage(
     imageUrl: String?,
+    key: String="",
     loadingPlaceholder: @Composable BoxScope.() -> Unit = {},
     errorPlaceholder: @Composable BoxScope.() -> Unit = {},
     contentDescription: String?,
     modifier: Modifier = Modifier,
     alignment: Alignment = Alignment.Center,
-    contentScale: ContentScale = ContentScale.Fit,
+    contentScale: ContentScale = ContentScale.Inside,
     alpha: Float = DefaultAlpha,
     colorFilter: ColorFilter? = null,
     filterQuality: FilterQuality = DrawScope.DefaultFilterQuality,

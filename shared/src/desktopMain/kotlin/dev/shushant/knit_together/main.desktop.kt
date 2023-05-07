@@ -6,17 +6,17 @@ import dev.shushant.resource.dimens.DeviceConfiguration
 import dev.shushant.resource.theme.Platform
 import dev.shushant.resource.theme.PlatformState
 import dev.shushant.knit_together.ui.App
-import dev.shushant.permission.picker.MediaPickerController
+import dev.shushant.permission.picker.LocalMediaController
 
 
 @Composable
 fun MainView(deviceConfiguration: DeviceConfiguration) {
     PlatformState.value = Platform.DESKTOP
-    App(deviceConfiguration, MediaPickerController.invoke())
+    App(deviceConfiguration, LocalMediaController.invoke())
 }
 
 @Preview
 @Composable
 fun AppPreview() {
-    App(DeviceConfiguration(), MediaPickerController.invoke())
+    App(DeviceConfiguration(), LocalMediaController.invoke())
 }

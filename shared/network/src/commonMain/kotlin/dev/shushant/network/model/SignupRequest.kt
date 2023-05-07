@@ -2,7 +2,9 @@ package dev.shushant.network.model
 
 
 import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
+@Serializable
 data class SignupRequest(
     @SerialName("email")
     val email: String? = "", // shushanttiwari.ashu@outlook.com

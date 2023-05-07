@@ -4,6 +4,7 @@ package dev.shushant.network.model
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
+@Serializable
 data class LoginResponse(
     @SerialName("displayName")
     val displayName: String? = "",

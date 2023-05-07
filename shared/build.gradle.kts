@@ -43,6 +43,7 @@ kotlin {
                 api(project(":shared:permission"))
                 api(project(":shared:persistence"))
                 api(project(":shared:network"))
+                implementation(libs.kermit)
             }
         }
         val androidMain by getting {
@@ -51,6 +52,7 @@ kotlin {
                 api(libs.android.compat)
                 api(libs.androidx.core.ktx)
                 implementation(libs.accompanist.systemcontroller)
+                implementation(libs.androidx.core.splashscreen)
             }
         }
         val iosX64Main by getting

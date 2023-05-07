@@ -10,18 +10,19 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import dev.shushant.resource.dimens.getDimens
-import dev.shushant.resource.navigation.Navigator
+import dev.shushant.resource.navigation.AppState
 import dev.shushant.resource.navigation.Screens
+import dev.shushant.resource.navigation.TopLevelDestination
 import kotlinx.coroutines.delay
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.painterResource
 
 @OptIn(ExperimentalResourceApi::class)
 @Composable
-internal fun SplashScreen(appState: Navigator) {
+internal fun SplashScreen(appState: AppState) {
     LaunchedEffect(Unit) {
         delay(2000L)
-        appState.push(Screens.OnBoardingScreen)
+        appState.navigate(TopLevelDestination.HOME.name, popUpTo = true)
     }
     Box(modifier = Modifier.fillMaxSize()) {
         Image(

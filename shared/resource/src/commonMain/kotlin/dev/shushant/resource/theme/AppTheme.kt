@@ -47,7 +47,7 @@ internal val LightDefaultColorScheme = lightColorScheme(
     onSurface = DarkPurpleGray10,
     surfaceVariant = PurpleGray90,
     onSurfaceVariant = PurpleGray30,
-    inverseSurface = DarkPurpleGray20,
+    inverseSurface = DarkPurpleGray95,
     inverseOnSurface = DarkPurpleGray95,
     outline = PurpleGray50,
 )
@@ -78,7 +78,7 @@ internal val DarkDefaultColorScheme = darkColorScheme(
     onSurface = DarkPurpleGray90,
     surfaceVariant = PurpleGray30,
     onSurfaceVariant = PurpleGray80,
-    inverseSurface = DarkPurpleGray90,
+    inverseSurface = DarkPurpleGray10,
     inverseOnSurface = DarkPurpleGray10,
     outline = PurpleGray60,
 )
@@ -206,16 +206,15 @@ internal val LocalAppDimens = staticCompositionLocalOf<Dimensions> {
     Dimensions.sw320
 }
 
-
-internal object AppNavigationDefaults {
+ object AppNavigationDefaults {
     @Composable
-    internal fun navigationContentColor() = MaterialTheme.colorScheme.onSurfaceVariant
-
-    @Composable
-    internal fun navigationSelectedItemColor() = MaterialTheme.colorScheme.onPrimaryContainer
+    fun navigationContentColor() = MaterialTheme.colorScheme.onSurfaceVariant
 
     @Composable
-    internal fun navigationIndicatorColor() = MaterialTheme.colorScheme.primaryContainer
+    fun navigationSelectedItemColor() = MaterialTheme.colorScheme.onPrimaryContainer
+
+    @Composable
+    fun navigationIndicatorColor() = MaterialTheme.colorScheme.primaryContainer
 }
 
 

@@ -10,12 +10,13 @@ import dev.shushant.resource.theme.darkmodeState
 import org.jetbrains.skiko.SystemTheme
 import org.jetbrains.skiko.currentSystemTheme
 import dev.shushant.resource.theme.safeAreaState
+import moe.tlaster.precompose.PreComposeApplication
 import platform.CoreGraphics.CGFloat
 
 internal var boundss: IntSize? = null
 
 fun MainViewController() =
-    ComposeUIViewController {
+    PreComposeApplication("KnitTogether") {
         AppViewIOS(bounds = boundss)
     }
 

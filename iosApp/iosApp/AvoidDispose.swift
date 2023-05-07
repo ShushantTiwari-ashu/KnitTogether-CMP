@@ -57,7 +57,7 @@ class AvoidDispose: UIViewController {
     }
 
     override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .default
+        return .lightContent
     }
 
     private func skiaRefresh() {

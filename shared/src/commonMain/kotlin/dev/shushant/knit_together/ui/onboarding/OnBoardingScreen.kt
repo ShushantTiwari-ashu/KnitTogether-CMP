@@ -10,39 +10,36 @@ import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowForward
-import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.shadow
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import dev.shushant.knit_together.utils.GradientIcon
-import dev.shushant.resource.dimens.getDimens
-import dev.shushant.resource.extensions.textBrush
-import dev.shushant.resource.navigation.NavOptions
-import dev.shushant.resource.navigation.Navigator
+import dev.shushant.resource.navigation.AppState
 import dev.shushant.resource.navigation.Screens
-import kotlinx.coroutines.delay
+import dev.shushant.resource.navigation.TopLevelDestination
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.painterResource
 
 @OptIn(ExperimentalResourceApi::class)
 @Composable
-fun OnBoardingScreen(navigator: Navigator) {
+fun OnBoardingScreen(navigator: AppState, loggedIn: Boolean) {
     Box(modifier = Modifier.fillMaxSize()) {
         Column(
-            modifier = Modifier.align(Alignment.Center).wrapContentHeight(),
+            modifier = Modifier.align(Alignment.Center).wrapContentHeight().verticalScroll(
+                rememberScrollState()
+            ),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(30.dp)
         ) {
@@ -51,7 +48,6 @@ fun OnBoardingScreen(navigator: Navigator) {
                 modifier = Modifier.heightIn(max = 300.dp),
                 contentScale = ContentScale.Inside
             )
-
             Text(
                 "Share your yarn \uD83D\uDC96", modifier = Modifier,
                 style = MaterialTheme.typography.headlineLarge,
@@ -74,8 +70,11 @@ fun OnBoardingScreen(navigator: Navigator) {
             modifier = Modifier.align(
                 Alignment.TopEnd
             ).padding(20.dp).background(color = Color.White, CircleShape).size(36.dp), onClick = {
-                navigator.push(
-                    Screens.AuthenticateScreen,
+                navigator.navigate(
+                    if (loggedIn) {
+                        TopLevelDestination.HOME.name
+                    } else
+                        Screens.AuthenticateScreen.route
                 )
             }
         )

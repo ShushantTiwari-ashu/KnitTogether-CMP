@@ -1,31 +1,21 @@
 package dev.shushant.network
 
-import dev.shushant.network.serialization.JsonSerializationHelper
-import io.ktor.client.*
-import io.ktor.client.call.*
-import io.ktor.client.plugins.contentnegotiation.*
-import io.ktor.client.plugins.logging.*
-import io.ktor.client.request.*
+import io.ktor.client.HttpClient
+import io.ktor.client.call.body
+import io.ktor.client.plugins.ResponseException
+import io.ktor.client.plugins.retry
+import io.ktor.client.request.get
+import io.ktor.client.request.post
+import io.ktor.client.request.setBody
 import io.ktor.client.statement.readBytes
-import io.ktor.client.utils.*
-import io.ktor.http.*
-import io.ktor.serialization.kotlinx.json.*
+import io.ktor.client.utils.EmptyContent
+import io.ktor.http.ContentType
+import io.ktor.http.URLBuilder
+import io.ktor.http.contentType
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
-class HTTPHelper {
-
-    val client = HttpClient {
-        install(ContentNegotiation) {
-            json(JsonSerializationHelper.JsonX())
-        }
-        install(Logging) {
-            logger = object : Logger {
-                override fun log(message: String) {
-                    println("HTTPHelper Network > $message")
-                }
-            }
-            level = LogLevel.INFO
-        }
-    }
+class HTTPHelper(val client: HttpClient) {
 
     suspend inline fun <reified T> doGet(
         urlBuilder: URLBuilder.() -> Unit
@@ -34,16 +24,19 @@ class HTTPHelper {
             url.apply(urlBuilder)
         }.body()
     }
+
     suspend inline fun <reified T> doGetWithByteArray(
-        urlBuilder: URLBuilder.() -> Unit
+        crossinline urlBuilder: URLBuilder.() -> Unit
     ): ByteArray {
-        return client.get {
-            url.apply(urlBuilder)
-        }.readBytes()
+        return withContext(Dispatchers.Default){
+            client.get {
+                url.apply(urlBuilder)
+            }.readBytes()
+        }
     }
 
-    suspend inline fun <reified T> doPost(
-        requestBody: Any = EmptyContent,
+    suspend inline fun <reified T,reified R> doPost(
+        requestBody: R,
         urlBuilder: URLBuilder.() -> Unit
     ): T {
         return client.post {
@@ -52,4 +45,5 @@ class HTTPHelper {
             contentType(ContentType.Application.Json)
         }.body()
     }
+
 }

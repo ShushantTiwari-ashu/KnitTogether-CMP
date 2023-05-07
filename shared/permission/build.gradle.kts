@@ -37,7 +37,6 @@ kotlin {
                 implementation(compose.runtime)
                 api(compose.foundation)
                 api(compose.animation)
-                api(libs.precompose.moe)
                 implementation(libs.kotlinx.datetime)
             }
         }

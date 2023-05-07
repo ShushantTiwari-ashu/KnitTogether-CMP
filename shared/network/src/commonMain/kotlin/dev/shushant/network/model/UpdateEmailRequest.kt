@@ -4,7 +4,7 @@ package dev.shushant.network.model
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
-
+@Serializable
 data class UpdateEmailRequest(
     @SerialName("email")
     val email: String? = "", // [user@example2.com]
@@ -13,6 +13,7 @@ data class UpdateEmailRequest(
     @SerialName("returnSecureToken")
     val returnSecureToken: Boolean? = false // true
 )
+@Serializable
 data class UpdateUserInfo(
     @SerialName("displayName")
     val displayName: String? = "", // [NAME]
@@ -23,7 +24,7 @@ data class UpdateUserInfo(
     @SerialName("returnSecureToken")
     val returnSecureToken: Boolean? = false // true
 )
-
+@Serializable
 data class UpdateEmailResponse(
     @SerialName("email")
     val email: String? = "", // [user@example2.com]
@@ -40,6 +41,7 @@ data class UpdateEmailResponse(
     @SerialName("refreshToken")
     val refreshToken: String? = "" // [NEW_REFRESH_TOKEN]
 ) {
+    @Serializable
     data class ProviderUserInfo(
         @SerialName("federatedId")
         val federatedId: String? = "", // [user@example2.com]
@@ -47,7 +49,7 @@ data class UpdateEmailResponse(
         val providerId: String? = "" // password
     )
 }
-
+@Serializable
 data class UserData(
     @SerialName("displayName")
     val displayName: String? = "", // John Doe
@@ -68,6 +70,7 @@ data class UserData(
     @SerialName("refreshToken")
     val refreshToken: String? = "" // [NEW_REFRESH_TOKEN]
 ) {
+    @Serializable
     data class ProviderUserInfo(
         @SerialName("displayName")
         val displayName: String? = "", // John Doe
@@ -80,11 +83,12 @@ data class UserData(
     )
 }
 
-
+@Serializable
 data class GetUserDataResponse(
     @SerialName("users")
     val users: List<User?>? = listOf()
 ) {
+    @Serializable
     data class User(
         @SerialName("createdAt")
         val createdAt: String? = "", // 1484124142000
@@ -113,7 +117,7 @@ data class GetUserDataResponse(
         @SerialName("validSince")
         val validSince: String? = "" // 1484124177
     ) {
-
+        @Serializable
         data class ProviderUserInfo(
             @SerialName("displayName")
             val displayName: String? = "", // John Doe

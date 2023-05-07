@@ -70,7 +70,11 @@ internal fun LoginFields(
 
         supportingText = {
             if (loginState.isValidEmail == false) {
-                Text(text = "Incorrect email!", textAlign = TextAlign.Center)
+                Text(
+                    text = "Incorrect email!",
+                    textAlign = TextAlign.Center,
+                    color = MaterialTheme.colorScheme.error
+                )
             }
         },
         textStyle = MaterialTheme.typography.bodyLarge.copy(textAlign = TextAlign.Start),
@@ -102,7 +106,7 @@ internal fun LoginFields(
     OutlinedTextField(
         value = loginState.password,
         onValueChange = { signInViewModel.setPassword(it) },
-        isError = !(loginState.isValidEmail ?: true),
+        isError = !(loginState.isValidPassword ?: true),
         placeholder = {
             Text(
                 text = "Password",
@@ -120,7 +124,11 @@ internal fun LoginFields(
 
         supportingText = {
             if (loginState.isValidPassword == false) {
-                Text(text = "Incorrect password!", textAlign = TextAlign.Center)
+                Text(
+                    text = "Incorrect password!",
+                    textAlign = TextAlign.Center,
+                    color = MaterialTheme.colorScheme.error
+                )
             }
         },
         textStyle = MaterialTheme.typography.bodyLarge.copy(textAlign = TextAlign.Start),

@@ -1,6 +1,6 @@
 [versions]
 atomicfu = "0.20.0"
-core-splashscreen = "1.0.0"
+core-splashscreen = "1.0.1"
 geo = "0.5.0"
 image-loader = "1.2.9"
 kermit = "2.0.0-RC4"
@@ -10,8 +10,8 @@ plugin-kotlin = "1.8.20"
 plugin-gver = "0.45.0"
 
 androidx-compose-compiler = "1.4.2"
-androidx-compose = "1.4.1"
-androidx-compose-ui = "1.4.1"
+androidx-compose = "1.4.2"
+androidx-compose-ui = "1.4.2"
 kotlinx-serialization = "1.4.1"
 kotlinx-coroutines = "1.6.4"
 ktor = "2.2.4"
@@ -22,16 +22,16 @@ voyager = "1.0.0-rc03"
 koin = "3.3.3"
 accompanist = "0.28.0"
 coil = "2.3.0"
-activity-compose = "1.7.0"
+activity-compose = "1.7.1"
 work-runtime-ktx = "2.8.1"
 desugar-jdk-libs = "2.0.3"
 precompose = "1.3.14"
 
-compose-version = "1.5.0-alpha02"
+compose-version = "1.5.0-alpha03"
 compose-material-version = "1.0.1"
-compose-runtime-version = "1.4.1"
-compose-activity-version = "1.7.0"
-compose-navigation-version = "2.6.0-alpha09"
+compose-runtime-version = "1.4.2"
+compose-activity-version = "1.7.1"
+compose-navigation-version = "2.6.0-beta01"
 
 [libraries]
 androidx-core-splashscreen = { module = "androidx.core:core-splashscreen", version.ref = "core-splashscreen" }
@@ -74,6 +74,7 @@ ktor-client-js = { module = "io.ktor:ktor-client-js", version.ref = "ktor" }
 ktor-client-android = { module = "io.ktor:ktor-client-android", version.ref = "ktor" }
 ktor-client-ios = { module = "io.ktor:ktor-client-ios", version.ref = "ktor" }
 ktor-client-cio = { module = "io.ktor:ktor-client-cio", version.ref = "ktor" }
+ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
 coroutines-swing = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-swing", version = "1.6.4" }
 voyager-navigator = { module = "cafe.adriel.voyager:voyager-navigator", version.ref = "voyager" }
 koin-core = { module = "io.insert-koin:koin-core", version.ref = "koin" }

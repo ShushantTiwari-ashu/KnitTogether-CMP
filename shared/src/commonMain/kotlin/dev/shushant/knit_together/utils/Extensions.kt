@@ -1,9 +1,9 @@
 package dev.shushant.knit_together.utils
 
 import androidx.compose.runtime.staticCompositionLocalOf
-import dev.shushant.permission.picker.MediaPickerController
+import dev.shushant.permission.picker.LocalMediaController
 
 
-internal val LocalMediaPickerController = staticCompositionLocalOf<MediaPickerController> {
+internal val LocalLocalMediaController = staticCompositionLocalOf<LocalMediaController> {
     error("Unable to get the controller")
 }

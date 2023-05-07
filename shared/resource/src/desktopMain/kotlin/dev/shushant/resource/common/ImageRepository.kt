@@ -27,16 +27,18 @@ object ImageRepository : KoinComponent {
      * If image was already loaded with this [url] then it picks it from [inMemoryCache] otherwise
      * loads it from the network and stores it in the cache.
      */
-    suspend fun getImageBitmapByUrl(url: String): ImageBitmap {
-        val bytes = inMemoryCache.getOrPut(url) {
-            when (val result = client.getImageBitmapByUrl(url)) {
-                is Either.Failure -> result.a.message.encodeToByteArray()
-                is Either.Success -> result.b
+    suspend fun getImageBitmapByUrl(url: String, key: String): ImageBitmap {
+        return withContext(DispatcherDefault) {
+            val bytes = inMemoryCache.getOrPut(key) {
+                when (val result = client.getImageBitmapByUrl(url)) {
+                    is Either.Failure -> throw Exception(result.a.message)
+                    is Either.Success -> result.b
+                }
             }
+            val bitmap = withContext(DispatcherDefault) {
+                Image.makeFromEncoded(bytes).toComposeImageBitmap()
+            }
+            bitmap
         }
-        val bitmap = withContext(DispatcherDefault) {
-            Image.makeFromEncoded(bytes).toComposeImageBitmap()
-        }
-        return bitmap
     }
 }

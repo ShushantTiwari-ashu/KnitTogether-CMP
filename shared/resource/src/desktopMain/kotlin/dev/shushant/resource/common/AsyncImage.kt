@@ -16,6 +16,7 @@ import androidx.compose.ui.layout.ContentScale
 @Composable
 actual fun AsyncImage(
     imageUrl: String?,
+    key: String,
     loadingPlaceholder: @Composable BoxScope.() -> Unit,
     errorPlaceholder: @Composable BoxScope.() -> Unit,
     contentDescription: String?,
@@ -26,7 +27,7 @@ actual fun AsyncImage(
     colorFilter: ColorFilter?,
     filterQuality: FilterQuality
 ) {
-    val imageState by rememberImageState(imageUrl)
+    val imageState by rememberImageState(imageUrl, key)
 
     Box(modifier = modifier) {
         when (val state = imageState) {
@@ -58,13 +59,13 @@ actual fun AsyncImage(
  * Remembers the state of an image in the composition with [url]
  */
 @Composable
-private fun rememberImageState(url: String?): State<ImageState> {
+private fun rememberImageState(url: String?, key: String): State<ImageState> {
     val initialState = if (url == null) ImageState.Error else ImageState.Loading
     return produceState(initialState, key1 = url) {
         if (url != null) {
             value = ImageState.Loading
             runCatching {
-                value = ImageState.Success(ImageRepository.getImageBitmapByUrl(url))
+                value = ImageState.Success(ImageRepository.getImageBitmapByUrl(url, key = key))
             }.getOrElse {
                 value = ImageState.Error
             }

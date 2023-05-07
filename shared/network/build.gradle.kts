@@ -2,6 +2,7 @@ plugins {
     kotlin("multiplatform")
     kotlin("native.cocoapods")
     id("com.android.library")
+    kotlin("plugin.serialization")
 }
 
 kotlin {
@@ -37,6 +38,7 @@ kotlin {
                 api(libs.ktor.logging)
                 api(libs.ktor.content.negotiation)
                 api(libs.ktor.json)
+                api(libs.ktor.client.core)
                 api(libs.kotlinx.datetime)
             }
         }
@@ -45,12 +47,19 @@ kotlin {
                 implementation(kotlin("test"))
             }
         }
-        val androidMain by getting
+        val androidMain by getting{
+            dependencies{
+                api(libs.ktor.client.android)
+            }
+        }
         val androidUnitTest by getting
         val iosX64Main by getting
         val iosArm64Main by getting
         val iosSimulatorArm64Main by getting
         val iosMain by creating {
+            dependencies {
+                api(libs.ktor.client.darwin)
+            }
             dependsOn(commonMain)
             iosX64Main.dependsOn(this)
             iosArm64Main.dependsOn(this)
@@ -65,7 +74,11 @@ kotlin {
             iosArm64Test.dependsOn(this)
             iosSimulatorArm64Test.dependsOn(this)
         }
-        val desktopMain by getting
+        val desktopMain by getting{
+            dependencies {
+                api(libs.ktor.client.cio)
+            }
+        }
     }
 }
 

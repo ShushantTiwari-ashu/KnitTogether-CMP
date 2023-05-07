@@ -36,6 +36,7 @@ kotlin {
                 api(libs.multiplatform.settings)
                 api(libs.multiplatform.settings.coroutines)
                 api(libs.kotlinx.datetime)
+                api(project(":shared:network"))
             }
         }
         val commonTest by getting {

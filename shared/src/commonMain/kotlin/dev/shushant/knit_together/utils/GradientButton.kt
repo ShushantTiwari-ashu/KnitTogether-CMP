@@ -15,6 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import dev.shushant.resource.dimens.getDimens
 import org.jetbrains.compose.resources.ExperimentalResourceApi
@@ -22,24 +23,27 @@ import org.jetbrains.compose.resources.painterResource
 
 @OptIn(ExperimentalResourceApi::class)
 @Composable
-internal fun GradientButton(icon: String = "", text: String, onClick: () -> Unit) {
+internal fun GradientButton(
+    enabled: Boolean = true,
+    modifier: Modifier, colors: List<Color> = listOf(
+        Color(0xb37d72e0),
+        Color(0xb3c48de4),
+    ), icon: String = "", text: String, onClick: () -> Unit
+) {
     Button(
         onClick = { onClick.invoke() },
-        modifier = Modifier.background(
+        modifier = modifier.background(
             Brush.linearGradient(
-                listOf(
-                    Color(0xb37d72e0),
-                    Color(0xb3c48de4),
-                ),
+                colors,
             ), shape = RoundedCornerShape(16.getDimens)
-        ).fillMaxWidth().height(50.dp),
+        ).fillMaxWidth(),
         shape = RoundedCornerShape(16.getDimens),
         colors = ButtonDefaults.buttonColors(
             contentColor = Color.Transparent,
             containerColor = Color.Transparent,
             disabledContentColor = Color.Transparent,
             disabledContainerColor = Color.Transparent
-        ),
+        ), enabled = enabled
     ) {
         if (icon.isNotBlank()) {
             Icon(

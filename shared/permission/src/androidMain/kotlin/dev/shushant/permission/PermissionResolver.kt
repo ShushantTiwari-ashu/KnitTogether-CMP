@@ -13,14 +13,14 @@ import androidx.lifecycle.lifecycleScope
 import java.lang.ref.WeakReference
 
 internal class PermissionResolver(val context: Context) {
-    private var activity: WeakReference<AppCompatActivity>? = null
+    private var activity: WeakReference<ComponentActivity>? = null
 
     init {
-        val activity = context as? AppCompatActivity
+        val activity = context as? ComponentActivity
         this.activity = WeakReference(activity)
     }
 
-    private val focusedActivity: AppCompatActivity?
+    private val focusedActivity: ComponentActivity?
         get() = activity?.get()?.let {
             if (it.isFinishing || it.isDestroyed) null else {
                 it

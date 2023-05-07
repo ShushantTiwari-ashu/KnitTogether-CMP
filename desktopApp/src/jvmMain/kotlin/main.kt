@@ -9,15 +9,15 @@ import androidx.compose.ui.window.application
 import dev.shushant.knit_together.MainView
 import dev.shushant.knit_together.di.initKoin
 import dev.shushant.resource.dimens.DeviceConfiguration
+import moe.tlaster.precompose.PreComposeWindow
 import java.awt.Dimension
-import java.awt.GraphicsConfiguration
 import java.awt.Toolkit
 
 private val koin = initKoin().koin
 
 fun main() = application {
     val configuration = Toolkit.getDefaultToolkit().screenSize
-    Window(
+    PreComposeWindow(
         onCloseRequest = ::exitApplication,
         title = ("KnitTogether"),
         state = WindowState(
