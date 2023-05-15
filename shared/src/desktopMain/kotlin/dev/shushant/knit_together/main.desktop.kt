@@ -2,9 +2,9 @@ package dev.shushant.knit_together
 
 import androidx.compose.desktop.ui.tooling.preview.Preview
 import androidx.compose.runtime.Composable
-import dev.shushant.resource.dimens.DeviceConfiguration
-import dev.shushant.resource.theme.Platform
-import dev.shushant.resource.theme.PlatformState
+import dev.shushant.utils.dimens.DeviceConfiguration
+import dev.shushant.utils.theme.Platform
+import dev.shushant.utils.theme.PlatformState
 import dev.shushant.knit_together.ui.App
 import dev.shushant.permission.picker.LocalMediaController
 

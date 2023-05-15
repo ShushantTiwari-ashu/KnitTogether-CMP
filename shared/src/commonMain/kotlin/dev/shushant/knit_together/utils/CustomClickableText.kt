@@ -10,10 +10,12 @@ import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
-import dev.shushant.resource.dimens.getDimens
+import dev.shushant.utils.dimens.getDimens
 
 @Composable
-internal fun CustomClickableText(value: String, spannableString: String, onClick: () -> Unit) {
+internal fun CustomClickableText(
+    value: String, spannableString: String, tag: String = "navigate", onClick: () -> Unit
+) {
     val text = buildAnnotatedString {
         val startIndex = value.indexOf(spannableString)
         val endIndex = startIndex + spannableString.length
@@ -26,19 +28,17 @@ internal fun CustomClickableText(value: String, spannableString: String, onClick
             ), start = startIndex, end = endIndex
         )
         addStringAnnotation(
-            tag = "navigate",
-            annotation = toString(),
-            start = startIndex,
-            end = endIndex
+            tag = tag, annotation = toString(), start = startIndex, end = endIndex
         )
     }
-    ClickableText(text,
+    ClickableText(
+        text,
         style = MaterialTheme.typography.titleSmall.copy(fontStyle = FontStyle.Normal),
         modifier = Modifier.padding(vertical = 10.getDimens),
         onClick = {
-            text.getStringAnnotations("navigate", it, it).firstOrNull()
-                ?.let {
-                    onClick.invoke()
-                }
-        })
+            text.getStringAnnotations(tag, it, it).firstOrNull()?.let {
+                onClick.invoke()
+            }
+        }
+    )
 }

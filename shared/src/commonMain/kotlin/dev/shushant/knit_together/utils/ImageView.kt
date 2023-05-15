@@ -9,7 +9,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.FilterQuality
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
-import dev.shushant.resource.common.AsyncImage
+import dev.shushant.utils.common.AsyncImage
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.painterResource
 import kotlin.random.Random
@@ -22,7 +22,7 @@ internal fun ImageView(
     alpha: Float = 0.8f,
     key: String = Random.nextInt(0, 10).toString()
 ) {
-    AsyncImage(
+    dev.shushant.utils.common.AsyncImage(
         imageUrl = url,
         contentScale = ContentScale.FillBounds,
         alpha = alpha,

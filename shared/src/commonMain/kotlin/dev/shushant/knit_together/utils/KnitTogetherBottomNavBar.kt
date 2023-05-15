@@ -18,9 +18,9 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
-import dev.shushant.resource.common.AsyncImage
-import dev.shushant.resource.navigation.AppState
-import dev.shushant.resource.navigation.TopLevelDestination
+import dev.shushant.utils.common.AsyncImage
+import dev.shushant.utils.navigation.AppState
+import dev.shushant.utils.navigation.TopLevelDestination
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.painterResource
 

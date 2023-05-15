@@ -8,7 +8,6 @@ import dev.shushant.network.extensions.toObject
 import dev.shushant.network.model.LoginResponse
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
-import kotlinx.serialization.serializer
 
 @OptIn(ExperimentalSettingsApi::class)
 class AppSettings(private val settings: ObservableSettings) {

@@ -33,13 +33,13 @@ import dev.shushant.knit_together.ui.splash.SplashScreen
 import dev.shushant.knit_together.utils.BackHandler
 import dev.shushant.knit_together.utils.CommonSnackBar
 import dev.shushant.knit_together.utils.KnitTogetherBottomNavBar
-import dev.shushant.resource.navigation.AppState
-import dev.shushant.resource.navigation.Screens
-import dev.shushant.resource.navigation.TopLevelDestination
-import dev.shushant.resource.navigation.getInitialScreen
-import dev.shushant.resource.navigation.rememberAppState
-import dev.shushant.resource.navigation.snackbarHostState
-import dev.shushant.resource.theme.SafeArea
+import dev.shushant.utils.navigation.AppState
+import dev.shushant.utils.navigation.Screens
+import dev.shushant.utils.navigation.TopLevelDestination
+import dev.shushant.utils.navigation.getInitialScreen
+import dev.shushant.utils.navigation.rememberAppState
+import dev.shushant.utils.navigation.snackbarHostState
+import dev.shushant.utils.theme.SafeArea
 import moe.tlaster.precompose.navigation.NavHost
 import moe.tlaster.precompose.ui.viewModel
 
@@ -101,12 +101,12 @@ internal fun MainScreen(
         ) {
             appState.showNavIcon().takeIf { it }?.let {
                 AppBar(
-                    isTopLevel = appState.showPost(),
+                    isTopLevel = appState.showPost().not(),
                     colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
                         containerColor = Color.Transparent,
                     ),
                     onNavigation = {
-
+                        appState.navigator.popBackStack()
                     },
                     onSearch = {
 
@@ -125,9 +125,17 @@ internal fun MainScreen(
                 TopLevelDestination.values().forEach { screen ->
                     scene(screen.name) {
                         when (screen) {
-                            TopLevelDestination.HOME -> HomePage(appState)
+                            TopLevelDestination.HOME -> HomePage(
+                                appState,
+                                viewModel.state.value.postData
+                            )
+
                             TopLevelDestination.SEARCH -> SearchScreen(appState)
-                            TopLevelDestination.CREATE -> CreatePost(appState)
+                            TopLevelDestination.CREATE -> CreatePost(
+                                appState,
+                                viewModel::updatePostData
+                            )
+
                             TopLevelDestination.NOTIFICATION -> NotificationScreen(appState)
                             TopLevelDestination.PROFILE -> ProfileScreen(appState)
                         }

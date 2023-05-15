@@ -14,6 +14,7 @@ import platform.AVFoundation.AVAuthorizationStatusNotDetermined
 import platform.AVFoundation.AVAuthorizationStatusRestricted
 import platform.AVFoundation.AVCaptureDevice
 import platform.AVFoundation.AVMediaType
+import platform.AVFoundation.AVMediaTypeVideo
 import platform.AVFoundation.authorizationStatusForMediaType
 import platform.AVFoundation.requestAccessForMediaType
 import kotlin.coroutines.resume
@@ -24,8 +25,7 @@ internal class AVCapturePermissionDelegate(
     private val permission: Permission
 ) : PermissionDelegate {
     override suspend fun providePermission() {
-        val status: AVAuthorizationStatus = currentAuthorizationStatus()
-        when (status) {
+        when (val status: AVAuthorizationStatus = currentAuthorizationStatus()) {
             AVAuthorizationStatusAuthorized -> {
                 return
             }

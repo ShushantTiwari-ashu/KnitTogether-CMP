@@ -8,11 +8,11 @@ import androidx.compose.ui.Modifier
 import dev.shushant.knit_together.ui.main.MainScreen
 import dev.shushant.knit_together.utils.LocalLocalMediaController
 import dev.shushant.permission.picker.LocalMediaController
-import dev.shushant.resource.dimens.DeviceConfiguration
-import dev.shushant.resource.navigation.LocalSnackbarHostState
-import dev.shushant.resource.theme.AppGradientBackground
-import dev.shushant.resource.theme.AppTheme
-import dev.shushant.resource.theme.LocalGradientColors
+import dev.shushant.utils.dimens.DeviceConfiguration
+import dev.shushant.utils.navigation.LocalSnackbarHostState
+import dev.shushant.utils.theme.AppGradientBackground
+import dev.shushant.utils.theme.AppTheme
+import dev.shushant.utils.theme.LocalGradientColors
 
 @Composable
 fun App(

@@ -9,10 +9,10 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
-import dev.shushant.resource.dimens.getDimens
-import dev.shushant.resource.navigation.AppState
-import dev.shushant.resource.navigation.Screens
-import dev.shushant.resource.navigation.TopLevelDestination
+import dev.shushant.utils.dimens.getDimens
+import dev.shushant.utils.navigation.AppState
+import dev.shushant.utils.navigation.Screens
+import dev.shushant.utils.navigation.TopLevelDestination
 import kotlinx.coroutines.delay
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.painterResource

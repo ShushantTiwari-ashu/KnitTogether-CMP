@@ -34,11 +34,11 @@ import dev.shushant.knit_together.utils.CustomClickableText
 import dev.shushant.knit_together.utils.CustomDivider
 import dev.shushant.knit_together.utils.GradientButton
 import dev.shushant.knit_together.utils.Loader
-import dev.shushant.resource.dimens.getDimens
-import dev.shushant.resource.navigation.AppState
-import dev.shushant.resource.navigation.Screens
-import dev.shushant.resource.navigation.TopLevelDestination
-import dev.shushant.resource.navigation.snackbarHostState
+import dev.shushant.utils.dimens.getDimens
+import dev.shushant.utils.navigation.AppState
+import dev.shushant.utils.navigation.Screens
+import dev.shushant.utils.navigation.TopLevelDestination
+import dev.shushant.utils.navigation.snackbarHostState
 import moe.tlaster.precompose.ui.viewModel
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.painterResource

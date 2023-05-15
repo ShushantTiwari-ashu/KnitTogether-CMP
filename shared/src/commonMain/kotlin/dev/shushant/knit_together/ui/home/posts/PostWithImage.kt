@@ -23,15 +23,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.SpanStyle
-import androidx.compose.ui.text.buildAnnotatedString
-import androidx.compose.ui.text.withStyle
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
+import dev.shushant.knit_together.ui.createpost.MediaType
+import dev.shushant.knit_together.ui.createpost.PostData
+import dev.shushant.knit_together.utils.ExpandingText
 import dev.shushant.knit_together.utils.ImageView
-import dev.shushant.knit_together.utils.PostBodyText
-import dev.shushant.network.extensions.splitText
-import dev.shushant.network.model.PostData
-import dev.shushant.resource.dimens.getDimens
+import dev.shushant.utils.dimens.getDimens
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.painterResource
 
@@ -61,7 +59,7 @@ internal fun PostWithImage(postData: PostData) {
                         .border(color = Color.White, width = 1.dp, shape = CircleShape)
                         .clip(CircleShape),
                     url = postData.userImage, alpha = 1f,
-                    key = postData.media.mediaUrl.plus(postData.userId),
+                    key = postData.userImage.plus(postData.userId),
                 )
 
                 Text(
@@ -74,21 +72,8 @@ internal fun PostWithImage(postData: PostData) {
                 Image(painter = painterResource("three_dots.xml"), contentDescription = null)
             }
         }
-        val str = buildAnnotatedString {
-            val pair =
-                splitText(postData.bodyText)
-            pair.forEach {
-                if (it.second) {
-                    withStyle(SpanStyle(color = Color(0XFF7268DC))) {
-                        append(it.first)
-                    }
-                } else {
-                    append(it.first)
-                }
-            }
-        }
-        PostBodyText(
-            annotatedDescription = str, modifier = Modifier.padding(horizontal = 20.getDimens)
+        ExpandingText(
+            text = postData.bodyText ?: "", modifier = Modifier.padding(horizontal = 20.getDimens)
                 .fillMaxWidth()
         )
 
@@ -96,15 +81,48 @@ internal fun PostWithImage(postData: PostData) {
             modifier = Modifier.padding(horizontal = 20.getDimens, vertical = 20.getDimens)
                 .heightIn(max = 250.getDimens).fillMaxWidth()
         ) {
-            ImageView(
-                modifier = Modifier.background(
-                    color = Color(0xd8b8a94), shape = RoundedCornerShape(10.getDimens)
-                ).fillMaxSize()
-                    .clip(RoundedCornerShape(10.getDimens)),
-                key = postData.media.mediaUrl.plus(postData.media.mediaId),
-                url = postData.media.mediaUrl,
-                alpha = 1.0f
-            )
+            with(postData.media.first()) {
+                when (mediaUrl) {
+                    is MediaType.BitmapType -> {
+                        Image(
+                            bitmap = mediaUrl.bitmap.toImageBitmap(),
+                            contentDescription = null,
+                            modifier = Modifier.background(
+                                color = Color(0xd8b8a94),
+                                shape = RoundedCornerShape(10.getDimens)
+                            ).fillMaxSize().clip(RoundedCornerShape(10.getDimens)),
+                            contentScale = ContentScale.FillBounds
+                        )
+                    }
+
+                    is MediaType.PathType -> {
+                        mediaUrl.media.preview?.let {
+                            Image(
+                                bitmap = it.toImageBitmap(),
+                                contentDescription = null,
+                                modifier = Modifier.background(
+                                    color = Color(0xd8b8a94),
+                                    shape = RoundedCornerShape(10.getDimens)
+                                ).fillMaxSize().clip(RoundedCornerShape(10.getDimens)),
+                                contentScale = ContentScale.FillBounds
+                            )
+                        } ?: kotlin.run {
+                            ImageView(
+                                modifier = Modifier.background(
+                                    color = Color(0xd8b8a94),
+                                    shape = RoundedCornerShape(10.getDimens)
+                                ).fillMaxSize()
+                                    .clip(RoundedCornerShape(10.getDimens)),
+                                key = mediaUrl.media.path.plus(
+                                    postData.media.first().mediaId
+                                ),
+                                url = mediaUrl.media.path,
+                                alpha = 1.0f
+                            )
+                        }
+                    }
+                }
+            }
         }
 
     }
