@@ -13,7 +13,7 @@ import androidx.compose.ui.unit.IntSize
 import dev.shushant.knit_together.ui.App
 import dev.shushant.permission.ios.PermissionsController
 import dev.shushant.permission.picker.ios.MediaPickerController
-import dev.shushant.resource.dimens.DeviceConfiguration
+import dev.shushant.utils.dimens.DeviceConfiguration
 import platform.UIKit.UIApplication
 
 @Composable

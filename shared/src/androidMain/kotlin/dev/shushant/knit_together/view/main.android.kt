@@ -9,9 +9,9 @@ import androidx.compose.ui.platform.LocalConfiguration
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import dev.shushant.knit_together.ui.App
 import dev.shushant.permission.picker.LocalMediaController
-import dev.shushant.resource.dimens.DeviceConfiguration
-import dev.shushant.resource.theme.Platform
-import dev.shushant.resource.theme.PlatformState
+import dev.shushant.utils.dimens.DeviceConfiguration
+import dev.shushant.utils.theme.Platform
+import dev.shushant.utils.theme.PlatformState
 
 @Composable
 fun AndroidView(localMediaController: LocalMediaController) {

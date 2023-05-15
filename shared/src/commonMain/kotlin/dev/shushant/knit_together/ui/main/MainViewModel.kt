@@ -1,5 +1,6 @@
 package dev.shushant.knit_together.ui.main
 
+import dev.shushant.knit_together.ui.createpost.PostData
 import dev.shushant.persistence.AppSettings
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -36,7 +37,14 @@ internal class MainViewModel : ViewModel(), KoinComponent {
         }
     }
 
-    private fun setState(update: (old: MainState) -> MainState): MainState = _state.updateAndGet(update)
+    fun updatePostData(postData: PostData?) {
+        postData?.let {
+            setState { state -> state.copy(postData = postData) }
+        }
+    }
+
+    private fun setState(update: (old: MainState) -> MainState): MainState =
+        _state.updateAndGet(update)
 
 }
 
@@ -45,5 +53,6 @@ internal data class MainState(
     val showBottomBar: Boolean = false,
     val isTopLevel: Boolean = false,
     val currentDestination: String = "",
-    val isLoggedIn: Boolean = true
+    val isLoggedIn: Boolean = true,
+    val postData: PostData? = null
 )

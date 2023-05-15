@@ -11,7 +11,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
-import dev.shushant.resource.dimens.getDimens
+import dev.shushant.utils.dimens.getDimens
 
 @Composable
 internal fun CustomDivider() {

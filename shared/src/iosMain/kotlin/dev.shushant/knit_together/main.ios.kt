@@ -4,12 +4,12 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.ComposeUIViewController
-import dev.shushant.resource.theme.Platform
-import dev.shushant.resource.theme.PlatformState
-import dev.shushant.resource.theme.darkmodeState
+import dev.shushant.utils.theme.Platform
+import dev.shushant.utils.theme.PlatformState
+import dev.shushant.utils.theme.darkmodeState
 import org.jetbrains.skiko.SystemTheme
 import org.jetbrains.skiko.currentSystemTheme
-import dev.shushant.resource.theme.safeAreaState
+import dev.shushant.utils.theme.safeAreaState
 import moe.tlaster.precompose.PreComposeApplication
 import platform.CoreGraphics.CGFloat
 

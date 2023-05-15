@@ -26,9 +26,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import dev.shushant.knit_together.utils.GradientIcon
-import dev.shushant.resource.navigation.AppState
-import dev.shushant.resource.navigation.Screens
-import dev.shushant.resource.navigation.TopLevelDestination
+import dev.shushant.utils.navigation.AppState
+import dev.shushant.utils.navigation.Screens
+import dev.shushant.utils.navigation.TopLevelDestination
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.painterResource
 

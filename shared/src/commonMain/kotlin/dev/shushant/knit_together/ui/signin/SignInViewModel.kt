@@ -4,7 +4,7 @@ import dev.shushant.network.api.KnitTogetherApi
 import dev.shushant.network.functional.Either
 import dev.shushant.network.model.SignupRequest
 import dev.shushant.persistence.AppSettings
-import dev.shushant.resource.common.AuthValidator
+import dev.shushant.utils.common.AuthValidator
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow

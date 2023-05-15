@@ -20,39 +20,6 @@ val hashtagPattern = Regex("(#[A-Za-z0-9_-]+)")
 val linkPattern = Regex("(#[A-Za-z0-9_-]+)")
 const val IS_LINK = "IS_LINK"
 
-fun splitText(text: String): List<Triple<String, Boolean, String?>> {
-    val segments = mutableListOf<Triple<String, Boolean, String?>>()
-    var lastIndex = 0
-    hashtagPattern.findAll(text).forEach { result ->
-        val range = result.range
-        if (lastIndex < range.first) {
-            segments.add(Triple(text.substring(lastIndex, range.first), false, null))
-        }
-        segments.add(Triple(result.value, true, null))
-        lastIndex = range.last + 1
-    }
-    linkPattern.findAll(text).forEach { result ->
-        val range = result.range
-        if (lastIndex < range.first) {
-            //segments.add(Triple(text.substring(lastIndex, range.first), false, null))
-        }
-        segments.add(Triple(result.value, true, IS_LINK))
-        lastIndex = range.last + 1
-    }
-    if (lastIndex < text.length) {
-        segments.add(Triple(text.substring(lastIndex), false, null))
-    }
-    return segments
-}
-
-fun identifyLinksAndHashtags(text: String): Pair<List<String>, List<String>> {
-    val links = Regex("""\b(?:https?://|www\.)\S+\b""").findAll(text)
-        .map { it.value }.toList()
-    val hashtags = Regex("""\B#\w\w+\b""").findAll(text)
-        .map { it.value }.toList()
-    return Pair(links, hashtags)
-}
-
 fun generateFullName(): String {
     val firstNames = listOf(
         "Emma",

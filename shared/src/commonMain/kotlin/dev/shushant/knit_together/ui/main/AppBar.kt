@@ -20,7 +20,7 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
-import dev.shushant.resource.extensions.textBrush
+import dev.shushant.utils.extensions.textBrush
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.painterResource
 
@@ -70,7 +70,7 @@ internal fun AppBar(
                     = Modifier.textBrush(
                         Brush.linearGradient(
                             listOf(
-                                Color(0xFF67E1D2),
+                                Color(0xff676de1),
                                 Color(0xcc54a8ff)
                             )
                         )

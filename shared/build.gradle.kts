@@ -3,6 +3,7 @@ plugins {
     kotlin("native.cocoapods")
     id("com.android.library")
     id("org.jetbrains.compose")
+    kotlin("plugin.serialization")
 }
 
 kotlin {
@@ -39,7 +40,8 @@ kotlin {
                 implementation(compose.components.resources)
                 implementation(compose.materialIconsExtended)
                 implementation(libs.compose.resource)
-                api(project(":shared:resource"))
+                api(libs.kotlinx.serialization.json)
+                api(project(":shared:utils"))
                 api(project(":shared:permission"))
                 api(project(":shared:persistence"))
                 api(project(":shared:network"))

@@ -10,29 +10,36 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import dev.shushant.knit_together.ui.createpost.PostData
+import dev.shushant.knit_together.ui.createpost.getCollection
 import dev.shushant.knit_together.ui.home.posts.PostWithImage
 import dev.shushant.knit_together.ui.home.storyview.CreateStoryView
 import dev.shushant.knit_together.ui.home.storyview.StoryView
 import dev.shushant.network.extensions.generateFullName
-import dev.shushant.network.model.getCollection
-import dev.shushant.resource.navigation.AppState
+import dev.shushant.utils.navigation.AppState
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import moe.tlaster.precompose.flow.collectAsStateWithLifecycle
 import moe.tlaster.precompose.ui.viewModel
 
 @OptIn(ExperimentalCoroutinesApi::class)
 @Composable
-internal fun HomePage(navigator: AppState) {
+internal fun HomePage(navigator: AppState, value: PostData?) {
     val state = rememberLazyListState()
     val viewModel = viewModel(HomeViewModel::class) {
         HomeViewModel()
     }
-    val homeState by viewModel.state.collectAsStateWithLifecycle(emptyList())
+    LaunchedEffect(value) {
+        viewModel.createPostData(value)
+    }
+    val homeState by viewModel.state.collectAsStateWithLifecycle(HomePageState.Initial)
 
     LazyColumn(
         modifier = Modifier.fillMaxSize()
@@ -57,9 +64,24 @@ internal fun HomePage(navigator: AppState) {
                 }
             }
         }
+        when (homeState) {
+            HomePageState.Loading -> {
+                item {
+                    LinearProgressIndicator()
+                }
+            }
 
-        items(homeState) {
-            PostWithImage(it)
+            is HomePageState.Success -> {
+                items((homeState as HomePageState.Success).postData) {
+                    PostWithImage(it)
+                }
+            }
+
+            else -> {
+                item {
+                    CircularProgressIndicator()
+                }
+            }
         }
     }
 }

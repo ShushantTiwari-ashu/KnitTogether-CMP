@@ -1,6 +1,6 @@
 @file:Suppress("UnstableApiUsage")
 
-include(":shared:resource")
+include(":shared:utils")
 include(":shared:network")
 include(":shared:permission")
 include(":shared:persistence")

@@ -8,7 +8,7 @@ import androidx.compose.ui.window.WindowState
 import androidx.compose.ui.window.application
 import dev.shushant.knit_together.MainView
 import dev.shushant.knit_together.di.initKoin
-import dev.shushant.resource.dimens.DeviceConfiguration
+import dev.shushant.utils.dimens.DeviceConfiguration
 import moe.tlaster.precompose.PreComposeWindow
 import java.awt.Dimension
 import java.awt.Toolkit
