@@ -14,7 +14,7 @@ fun String.toWordCaps(): String {
     return newStr.trim()
 }
 
-internal const val FIREBASE_WEB_API_KEY = "AIzaSyBswXSI0pWr7M3o4kcZyYViCvWzbyj4ass"
+internal const val FIREBASE_WEB_API_KEY = ""
 
 val hashtagPattern = Regex("(#[A-Za-z0-9_-]+)")
 val linkPattern = Regex("(#[A-Za-z0-9_-]+)")
